@@ -1,4 +1,16 @@
+#header {
+	text-align: center;
+}
+
+h1 {
+	color: #404040;
+}
+
+.main-copy {
+	margin: 0 20% 0 20%;
+}
+
 p {
-	color: #101010;
+	color: #303030;
 	font-size: 16px;
 }
