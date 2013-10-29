@@ -25,7 +25,6 @@ article {
 	font: 16px/150% Georgia, Times, 'Times New Roman', serif;
 	text-indent: 20px;
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-	text-rendering: optimizeLegibility;
 	color: #444;
 }
 
