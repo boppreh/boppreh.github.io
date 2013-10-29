@@ -1,16 +1,90 @@
-#header {
+header, article, footer {
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px 30px;
+}
+
+header {
+	font: small-caps 40px 'Verdana', sans-serif;
 	text-align: center;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	letter-spacing: .2em;
+	color: #333;
+	padding-top: 0px;
 }
 
-h1 {
-	color: #404040;
+body {
+	background: url('pixel_weave.png') repeat;
 }
 
-.main-copy {
-	margin: 0 20% 0 20%;
+article {
+	background-color: #EEE;
+	border-radius: 10px;
+	padding: 14px 30px;
+
+	font: 16px/150% Georgia, Times, 'Times New Roman', serif;
+	text-indent: 20px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	text-rendering: optimizeLegibility;
+	color: #444;
 }
 
-p {
-	color: #303030;
-	font-size: 16px;
+article video, article img {
+	min-width: 30px;
+	max-width: 600px;
+
+	display: block;
+	margin: 0 auto;
+
+	border: 1px solid #666;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+section + section {
+	margin-top: 40px;
+}
+
+section h1 {
+	font: bold 26px 'Verdana', sans-serif;
+}
+
+section a {
+	font-weight: bold;
+	color: #44F;
+}
+
+section a:hover {
+	color: #00C;
+}
+
+section dt {
+	font-weight: bold;
+}
+
+section dd + dt {
+	margin-top: .5em;
+}
+
+code {
+	font: 16px 'Consolas', 'Courier New', monospace;
+	color: #EEE;
+	margin-left: 20px;
+
+	padding: 10px 10px;
+	
+	background-color: #555;
+	box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+footer {
+	font: italic 14px Arial, sans-serif;
+	color: #777;
+	text-align: right;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+footer a {
+	color: inherit;
+	text-decoration: none;
 }
