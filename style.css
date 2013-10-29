@@ -1,7 +1,6 @@
 header, article, footer {
 	width: 600px;
 	margin: 0 auto;
-	padding: 20px 30px;
 }
 
 header {
@@ -10,7 +9,7 @@ header {
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 	letter-spacing: .2em;
 	color: #333;
-	padding-top: 0px;
+    padding: 0px 20px 30px 30px
 }
 
 body {
@@ -81,6 +80,7 @@ footer {
 	color: #777;
 	text-align: right;
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px 30px;
 }
 
 footer a {
