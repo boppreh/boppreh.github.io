@@ -27,19 +27,29 @@ article {
 	color: #444;
 }
 
-article video, article img {
-	min-width: 30px;
-	max-width: 600px;
+figure {
+    margin: 50px 0;
+}
+
+figure img, figure video {
+	min-width: 50px;
+	max-width: 100%;
 
 	display: block;
 	margin: 0 auto;
 
 	border: 1px solid #666;
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+figcaption {
+    margin-top: .5em;
+    font-style: italic;
+    text-align: center;
 }
 
 section + section {
-	margin-top: 40px;
+	margin-top: 50px;
 }
 
 section h1 {
@@ -66,13 +76,15 @@ section dd + dt {
 code {
 	font: 16px 'Consolas', 'Courier New', monospace;
 	color: #EEE;
-	margin-left: 20px;
+	/*margin-left: 20px;
 
-	padding: 10px 10px;
+	padding: 10px 10px;*/
 	
 	background-color: #555;
 	box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
+
+    white-space: pre;
 }
 
 footer {
