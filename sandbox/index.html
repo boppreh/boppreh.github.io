@@ -7,147 +7,35 @@
 	</head>
 
 	<body>
-		<header>My Projects</header>
+		<header>Sandbox</header>
 
 		<article>
 			<section>
-				<h1>Libraries</h1>
+				<h1>The following are HTML/CSS tests </h1>
 
-				<p>Some were made just for fun in a couple of hours, others have been been in use for years. Written in Python unless noted otherwise, and mostly for Py3.3.</p>
+                <figure>
+                    <img src="http://www.austintexas.gov/sites/default/files/files/Animal_Services/cute-kitten-playing.jpg">
+                    <figcaption>This is a very large image resized to fit the
+                    column</figcaption>
+                </figure>
 
-				<dl>
-				<dt><a href="https://github.com/boppreh/console">console</a></dt>
-				<dd>Cross platform library for simple command line applications</dd>
+                <figure>
+                    <img
+                    src="http://www.austintexas.gov/sites/default/files/files/Animal_Services/cute-kitten-playing.jpg"
+                    width=5>
+                    <figcaption>This is a very small image resized to be
+                    visible</figcaption>
+                </figure>
 
-				<dt><a href="https://github.com/boppreh/inflist">inflist</a></dt>
-				<dd>Infinite lists in Python using lazy evaluation</dd>
-
-				<dt><a href="https://github.com/boppreh/quine">quine</a></dt>
-				<dd>Transforms any Python program into a quine</dd>
-
-				<dt><a href="https://github.com/boppreh/markov">markov</a></dt>
-				<dd>Markov chain library to create new data from examples</dd>
-
-				<dt><a href="https://github.com/boppreh/background">background</a></dt>
-				<dd>Library for Python applications that run in the background</dd>
-
-				<dt><a href="https://github.com/boppreh/simpleserver">simpleserver</a></dt>
-				<dd>Simple HTTP server backed by nothing more than a couple of dictionaries</dd>
-
-				<dt><a href="https://github.com/boppreh/keyboard">keyboard</a></dt>
-				<dd>Utility for handling global keyboard events in Windows</dd>
-
-				<dt><a href="https://github.com/boppreh/derivative">derivative</a></dt>
-				<dd>Library for calculating derivatives using dual numbers</dd>
-
-				<dt><a href="https://github.com/boppreh/bayesian">bayesian</a></dt>
-				<dd>Utility for Bayesian reasoning</dd>
-
-				<dt><a href="https://github.com/boppreh/easier-as3">easier-as3</a></dt>
-				<dd>Tiny functions for common tasks</dd>
-
-				<dt><a href="https://github.com/boppreh/fsm">fsm</a></dt>
-				<dd>Fast and simple Finite State Machine library</dd>
-
-				<dt><a href="https://github.com/boppreh/libeditor">libeditor</a></dt>
-				<dd>Library for creating a multi-document editor with a desktop GUI</dd>
-
-				<dt><a href="https://github.com/boppreh/gifencoder">gifencoder</a></dt>
-				<dd>The missing method gif.Encode in Go's library</dd>
-
-				<dt><a href="https://github.com/boppreh/kahn">kahn</a></dt>
-				<dd>Simple and flexible pipeline system for Python</dd>
-
-				<dt><a href="https://github.com/boppreh/simplecrypto">simplecrypto</a></dt>
-				<dd>Cryptographic library with really simple API</dd>
-
-				<dt><a href="https://github.com/boppreh/fuzzy">fuzzy</a></dt>
-				<dd>Library for decision making based on fuzzy rules</dd>
-				</dl>
+                <code>this_is_some_code
+def fn():
+    print("it accepts indentations correctly")
+    return [
+            "a"
+            ]</code>
 			</section>
-			<section>
-				<h1>Background Applications</h1>
-
-				<p>I love the idea of small programs with little to no interface doing work in the background, and this is my collection of them. These applications live in the tray bar, interfacing with the user through notifications or web services. They are very small, from a few dozen lines to no more than a couple hundred.</p>
-
-				<p>All of them require and make use of the <a href="https://github.com/boppreh/background">background</a> and <a href="https://github.com/boppreh/simpleserver">simpleserver</a> libraries, and are written for Python 3.3. May contain hardcoded paths because they are too small to have proper configurations.</p>
-
-				<dl>
-				<dt><a href="https://github.com/boppreh/typist">typist</a></dt>
-				<dd>Records typing statistics <em>WARNING: records all keypresses in plaintext, potentially exposing passwords and private information. Use with caution.</em></dd>
-				
-				<dt><a href="https://github.com/boppreh/scheduler">scheduler</a></dt>
-				<dd>Schedule manager, notifying of events and allocating time for tasks</dd>
-				
-				<dt><a href="https://github.com/boppreh/pycalc">pycalc</a></dt>
-				<dd>Calculator server with measure unit and Python support <em>WARNING: runs user supplied code. Check your firewall before starting.</em></dd>
-				
-				<dt><a href="https://github.com/boppreh/switch">switch</a></dt>
-				<dd>Server responsible for starting and stopping the other applications</dd>
-				
-				<dt><a href="https://github.com/boppreh/netstat">netstat</a></dt>
-				<dd>Detects changes in network connection quality and notifies the user</dd>
-				
-				<dt><a href="https://github.com/boppreh/gitstatus">websentinel</a></dt>
-				<dd>Background app for tracking status of local Git repositories</dd>
-				
-				<dt><a href="https://github.com/boppreh/doorman">doorman</a></dt>
-				<dd>Notifies when computers enter and exit the wireless network</dd>
-
-				<dt><a href="https://github.com/boppreh/dashboard">dashboard</a></dt>
-				<dd>Shows current status of background applications</dd>
-
-				<dt><a href="https://github.com/boppreh/j">j</a></dt>
-				<dd>Extensible global hotkeys for common tasks</dd>
-
-				<dt><a href="https://github.com/boppreh/activity">activity</a></dt>
-				<dd>Watches, stores and reports user activity on the computer</dd>
-				</dl>
-			</section>
-			<section>
-				<h1>CLI Applications</h1>
-
-				<p>Simple but useful applications that run in a command prompt.</p>
-
-				<dl>
-				<dt><a href="https://github.com/boppreh/autokeyboard">autokeyboard</a></dt>
-				<dd>Automate everything keyboard</dd>
-
-				<dt><a href="https://github.com/boppreh/kindle-collections">kindle-collections</a></dt>
-				<dd>Automatically generates collections from your directory structure</dd>
-
-				<dt><a href="https://github.com/boppreh/websentinel">websentinel</a></dt>
-				<dd>Watches webpages for changes and keyword occurencess</dd>
-
-				<dt><a href="https://github.com/boppreh/filereplace">filereplace</a></dt>
-				<dd>Utility to easily replace patterns in files</dd>
-				
-				<dt><a href="https://github.com/boppreh/packager">packager</a></dt>
-				<dd>Python script for converting existing projects into PyPi packages</dd>
-				
-				<dt><a href="https://github.com/boppreh/anakata">anakata</a></dt>
-				<dd>A 4D, tiled, command line puzzle game in Python</dd>
-				</dl>
-			</section>
-			<section>
-				<h1>Experiments</h1>
-
-				<p>One-off programs created to test a concept or as an exercise.</p>
-
-				<dl>
-				<dt><a href="https://github.com/boppreh/gomeet">gomeet</a></dt>
-				<dd>Go server to punch NAT holes</dd>
-				
-				<dt><a href="https://github.com/boppreh/gowiki">gowiki</a></dt>
-				<dd>Very simple wiki server in Go</dd>
-				
-				<dt><a href="https://github.com/boppreh/attachment">attachment</a></dt>
-				<dd>Downloads email attachments you receive and emails attachments you upload</dd>
-				
-				<dt><a href="https://github.com/boppreh/miller-rabin">miller-rabin</a></dt>
-				<dd>Simple implementation of the Miller-Rabin primality test in Go and Python</dd>
-				</dl>
-			</section>
+            
+            <p>This is a paragraph.</p>
 		</article>
 
 		<footer><a href="mailto:contact@boppreh.com">contact@boppreh.com</a></footer>
