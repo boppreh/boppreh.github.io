@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>Bounce (Ludum Dare #28)</title>
+    </head>
+
+    <body style='background: black;'>
+        <canvas id='canvas' width=800 height=600 style='display: block;
+        background: #111; margin-left: auto; margin-right: auto; cursor: none;'></canvas>
+
+        <div style="width: 350px; margin: 40px auto auto auto; padding: 20px; color: #222; background-color: #CECECE;">
+            <p>Game developed for the #28 Ludum Dare compo.</p>
+            <p><a href="http://www.ludumdare.com/compo/ludum-dare-28/?action=preview&uid=30967">Ludum Dare game entry</a></p>
+            <p><a href="https://github.com/boppreh/ludum_dare28/tree/f29ec0ce3d6cfeb97e15571c2624a836ec21858e">Game source code</a> / <a href="https://github.com/boppreh/gl4/tree/d7d84eb7edd2d7f85d2ae5c5e665a62dec2b6ae5">Library source code</a></p>
+        </div>
+
+        <script type='text/javascript' src='gl4.js'></script>
+        <script type='text/javascript' src='behaviors.js'></script>
+        <script type='text/javascript' src='conditions.js'></script>
+        <script type='text/javascript' src='bounce.js'></script>
+
+        <img src="player.png" width=0 height=0>
+        <img src="ball.png" width=0 height=0>
+        <img src="target.png" width=0 height=0>
+        <img src="enemy.png" width=0 height=0>
+        <img src="explosion.png" width=0 height=0>
+        <script>
+window.onload = makeStartScreen;
+        </script>
+    </body>
+</html>
