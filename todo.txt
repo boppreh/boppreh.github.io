@@ -1,0 +1,92 @@
+Screens
+=======
+
+[x] Continue/New Game with demo on the background
+[ ] Mission choosing grid
+[ ] Upgrade/current stats
+[x] Level screen
+
+
+Mechanics
+=========
+
+[x] Mouse loosely controls ball inertia
+[x] Enemies spawn
+	[x] From inside an area
+	[x] From the perimeter of an area
+[x] Ball hitting enemy destroys enemy
+[ ] Enemies drops
+	[ ] Enemies drop items on death
+	[ ] Ball (or mouse?) can pick up items
+[x] Enemy hitting center takes life
+[ ] Variable game attributes
+	[ ] Ball attraction force
+    [ ] Ball natural friction
+	[ ] Ball resistance on hitting enemy
+    [ ] Enemy speed
+    [ ] Enemy acceleration
+    [x] Enemy spawn rate
+[ ] Temporary powerups
+    [ ] Dropped by enemies
+    [ ] Picked up by ball
+    [ ] Changes game attributes
+    [ ] Display change and timer in UI
+    [ ] Reverts after set time
+[x] Vary attributes by mission
+[x] Check mission objective
+
+
+Effects
+=======
+
+[x] Permanent effect around ball
+[ ] Enemy is created
+[ ] Player attracts ball
+[x] Ball hits enemy
+[ ] Ball picks up powerup
+[ ] Player picks up item/money
+[ ] Enemy hits center
+[ ] Powerup depletes
+[ ] Mission completed
+[ ] Mission failed
+
+
+Story
+=====
+
+[ ] Introduction
+[ ] Tutorial
+[ ] First mission
+[ ] Regular missions
+[ ] Last stand
+[?] Survival (arcade)
+
+
+Assets
+======
+
+[ ] Sounds
+    [ ] Constant ball whirring
+    [?] Player attracts ball
+    [ ] Ball hits enemy
+    [ ] Ball picks up powerup
+    [ ] Player picks up item/money
+    [ ] Enemy hits center
+    [ ] Powerup depletes
+    [ ] Mission completed
+    [ ] Mission failed
+    [ ] UI sounds
+[ ] Graphics
+    [x] Ball
+    [x] Player
+    [x] Enemy(ies?)
+    [x] Target
+    [x] Explosion
+    [ ] Background
+    [ ] UI
+    [ ] Pickups
+    [ ] Screen UI components
+[ ] Music
+    [ ] Background
+    [?] During mission
+    [?] During arcade
