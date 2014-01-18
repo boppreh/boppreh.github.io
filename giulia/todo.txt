@@ -1,0 +1,70 @@
+Fixes
+=====
+
+! Update size after rotating (performance? getters/setters?)
++ Make limit, reflect and wrap consider object sizes
+- Make tests
+- Preload sounds
+- Cache effects and images drawn for faster rendering
+
+
+New Features
+============
+
++ Add object/area collision (or Area objects?)
++ Add object/object collision with pixel checking
++ Maze collision test
+- Use frame-invariable physics steps (RK4?)
+? Use multiple collision types in a single check (circle/AABB, AABB/pixel)
+
+
+System suggestions
+==================
+
++ Docs and comments for behaviors
+~ Include online multiplayer support (server?)
+? Include tile support (different types of layers?)
+? Allow multiple GL5 objects
+
+
+New Behaviors
+=============
+
+- Sight
+~ Show health
+
+
+New Conditions
+==============
+
++ Time
++ Destruction
+- Crossing (or use Area system?)
+- Movement
+~ Creation
+
+
+New Effects
+===========
+
++ Spin
++ Tint/Untint
+- Move from up/down/left/right
+- Blink
+- Shine
+- Shake
+- Screen fade in/out
+
+
+Utils
+=====
+
++ Random in/on circle/rectangle
+- On line/grid
+
+
+Review
+======
+
++ Conditions having to return arrays of arrays
++ Duplicated code on bevahiors and conditions

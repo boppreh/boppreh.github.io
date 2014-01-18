@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <head>
+        <title>Jogo da Rapunzel</title>
+    </head>
+
+    <body style='background: black;'>
+        <canvas id='canvas' width=800 height=600 style='display: block; background: #EEE; margin-left: auto; margin-right: auto;'></canvas>
+
+        <script type='text/javascript' src='gl5.js'></script>
+        <script type='text/javascript' src='behaviors.js'></script>
+        <script type='text/javascript' src='conditions.js'></script>
+        <script>
+function game() {
+    gl5.layer();
+
+    var background = gl5.createImage('fundo.png');
+    var credits = gl5.createText('Autora: Giulia Caprali Niehues');
+    credits.pos = {x: 790, y: 22};
+    credits.alignment = 'right';
+    shadow(credits, 1);
+
+    var tower = gl5.createImage('torre.png');
+    tower.pos = {x: 700, y: 500};
+
+    var rap = gl5.createImage('rapunzel.png');
+    rap.size = {x: 100, y: 100};
+
+    var witch = gl5.createImage('bruxa.png');
+    witch.size = {x: 100, y: 100};
+
+    var won = false;
+
+    gl5.register(function () {
+        if (rap.distanceTo(gl5.mouse) > 10) {
+            attract(rap, gl5.mouse);
+        }
+
+        if (won) {
+            attract(witch, tower, -4);
+
+            if (click('restart').length) {
+                gl5.unlayerAll();
+                game();
+            }
+        } else {
+            attract(witch, rap, 2);
+
+            if (rap.distanceTo(tower) < 90) {
+                won = true;
+                var btnRestart = gl5.createText('Recomeçar', 'restart');
+                shadow(btnRestart, 2);
+                btnRestart.font = '48px Impact';
+                btnRestart.pos = {x: 200, y: 100};
+            }
+        }
+    });    
+}
+
+game();
+
+        </script>
+    </body>
+</html>
