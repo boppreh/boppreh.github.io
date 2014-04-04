@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <head>
+        <title>GL5</title>
+    </head>
+
+    <body style='background: black;'>
+        <canvas id='canvas' width=600 height=600 style='display: block; background: white; margin-left: auto; margin-right: auto;'></canvas>
+
+        <script type='text/javascript' src='gl5.js'></script>
+        <script type='text/javascript' src='behaviors.js'></script>
+        <script type='text/javascript' src='conditions.js'></script>
+        <script>
+var LEVEL_TIME = 5, MAX_LEVEL = 10, LIVES = 5;
+
+gl5.createImage('fundo.png');
+
+function game() {
+	var gameLayer = gl5.layer();
+
+	gl5.layer();
+	var credits = gl5.createText('Criado por Maria Eduarda Boppré Andrejczuk', 'text');
+	credits.pos.x = 585;
+	credits.pos.y = 585;
+	credits.font = '14px Verdana'
+	credits.color = '#99FF99';
+	credits.alignment = 'right';
+
+	var lives = gl5.createText(LIVES, 'text');
+    lives.suffix = ' vidas'
+	lives.pos.x = 10;
+	lives.pos.y = 40;
+	lives.font = '72px Impact'
+	lives.color = 'red';
+	lives.alignment = 'left';
+	lives.minValue = 0;
+
+	var level = gl5.createText(1, 'text');
+    level.prefix = 'Level '
+	level.pos.x = 590;
+	level.pos.y = 40;
+	level.font = '72px Impact'
+	level.color = 'green';
+	level.alignment = 'right';
+	level.minValue = 0;
+
+	var timer = gl5.createText(LEVEL_TIME, 'text');
+    timer.suffix = 's';
+	timer.pos.x = 300;
+	timer.pos.y = 40;
+	timer.font = '72px Impact'
+	timer.color = '#6666FF';
+	timer.alignment = 'center';
+	timer.minValue = 0;
+
+	gl5.activeLayer = gameLayer;
+	var po = gl5.createImage('po.png', 'player', {x: 50, y: 50}, {x: 40, y: 40});
+
+	var enemy1 = gl5.createImage('inimigo.png', 'enemy', {}, {x: 40, y: 40});
+
+	gl5.register(function () {
+		follow('player', gl5.mouse);
+		follow('enemy', 'player', 1);
+		attract('enemy', 'enemy', -0.2);
+
+		gl5.forEach('player', 'enemy', function (player, enemy) {
+			if (player.hitTest(enemy)) {
+				lives.value--;
+				attract('enemy', 'player', -100);
+
+				if (lives.value === 0) {
+					gameOver();
+				}
+			}
+		});
+
+		timer.value -= 1 / 60;
+
+		if (timer.value <= 0) {
+			level.value++;
+			timer.value = LEVEL_TIME;
+
+			var newEnemy = gl5.createImage('inimigo.png', 'enemy', {}, {x: 40, y: 40});
+
+			if (level.value == MAX_LEVEL) {
+				congrats();
+			}
+		}
+	});
+}
+
+function makeStartButton(text, color, pos) {
+	var btn = gl5.createText(text, 'text', pos);
+	btn.font = '48px Impact';
+	btn.color = color;
+
+	gl5.register(function () {
+		if (gl5.mouse.isDown && btn.hitTest(gl5.mouse)) {
+			gl5.unlayerAll();
+			game();
+		}
+	});
+}
+
+function gameOver() {
+	gl5.unlayerAll();
+
+	gl5.layer();
+	var gameOver1 = gl5.createText('Você não ganhou', 'text');
+	gameOver1.font = '72px Impact';
+	gameOver1.color = 'red';
+
+	var gameOver2 = gl5.createText('Mas tente de novo', 'text');
+	gameOver2.pos.y += 70;
+	gameOver2.font = '48px Impact';
+	gameOver2.color = 'red';
+
+	makeStartButton('Jogar novamente', 'blue', {y: 500});
+}
+
+function startScreen() {
+	gl5.layer();
+
+	var instructions = gl5.createText('Fuja do bandido', 'text', {y: 200});
+	instructions.font = '48px Impact';
+	instructions.color = 'green';
+
+	makeStartButton('Jogar', 'blue', {y: 400});
+}
+
+function congrats() {
+	gl5.unlayerAll();
+
+	gl5.layer();
+	var congratulations = gl5.createText('Parabéns', 'text', {y: 200});
+	congratulations.font = '48px Impact';
+	congratulations.color = 'green';
+
+	makeStartButton('Jogar', 'blue', {y: 400});
+}
+
+startScreen();
+        </script>
+    </body>
+</html>
