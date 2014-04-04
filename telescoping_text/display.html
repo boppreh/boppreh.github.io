@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Chomsky é um mago</title>
+        <link rel="stylesheet" href="style.css">
+
+        <style>
+        .tele {
+        	background-color: #EFFFBB;
+        	border-radius: 5px;
+        	padding: 4px 4px;
+
+        	cursor: pointer;
+        }
+
+        a {
+        	color: inherit !important;
+        }
+
+        .tele a {
+		   pointer-events: none;
+		   cursor: default;
+		   text-decoration: none;
+        }
+        </style>
+	</head>
+
+    <body>
+		<article ondblclick="expandOnce()">
+			<section>
+				<p id="content_element">
+					
+				</p>
+			</section>
+		</article>
+		<footer>
+			Text and code by <a href="boppreh.com">BoppreH</a>, interface idea by <a href="http://www.telescopictext.com/">Joe Davis</a>.
+		</footer>
+    </body>
+
+    <script>
+    function loadText() {
+    	var client = new XMLHttpRequest();
+		client.open('GET', 'text.txt');
+		client.onreadystatechange = function() {
+			if (client.readyState != client.DONE)
+				return;
+
+			display(client.responseText);
+		}
+		client.send();
+    }
+
+    function display(text) {
+    	var htmlText = text.replace(/\[(\w+):/g, '<span class="tele" id="$1">').replace(/\]/g, '</span>'),
+    		links = htmlText.split('-----')[2],
+			
+
+		linksLines = links.split('\n');
+		for (var i = 0; i < linksLines.length; i++) {
+			var line = linksLines[i];
+			if (line.match(/^\s*$/))
+				continue;
+			
+			var	match = line.match(/^([^:]+?):\s*(.+)$/),
+				expression = match[1],
+				url = match[2];
+            
+			htmlText = htmlText.replace(new RegExp('(' + expression + 's?)', 'ig'),
+                                        '<a href="' + url + '">$1</a>')
+		}
+		
+		var parts = htmlText.split('-----'),
+			content = parts[0],
+			replacementsText = parts[1];
+		document.getElementById('content_element').innerHTML = content;
+
+
+		// Global.
+		replacements = {};
+		var replacementsRegex = /(\w+):\s*(.+)/g;
+		while (match = replacementsRegex.exec(replacementsText)) {
+			replacements[match[1]] = match[2];
+		}
+
+		updateListeners();
+    }
+
+    function updateListeners() {
+    	var elements = document.getElementsByClassName('tele');
+        for(var i = 0; i < elements.length; i++) {
+        	var element = elements[i];
+        	element.onclick = function (event) {
+        		var element = event.target;
+        		element.outerHTML = replacements[element.id];
+        		updateListeners();
+        	}
+        }
+    }
+
+    function expandOnce() {
+    	window.getSelection().removeAllRanges();
+    	var elements = document.getElementsByClassName('tele');
+        for(var i = 0; i < elements.length; i++) {
+        	var element = elements[i];
+        	element.onclick({'target': element});
+        }
+    }
+            
+    
+    loadText();
+    </script>
+</html>

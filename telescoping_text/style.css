@@ -1,0 +1,105 @@
+header, article, footer {
+	width: 600px;
+	margin: 0 auto;
+}
+
+header {
+	font: small-caps 40px 'Verdana', sans-serif;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	letter-spacing: .2em;
+	color: #333;
+    padding: 0px 20px 30px 30px
+}
+
+body {
+	background: url('pixel_weave.png') repeat;
+}
+
+article {
+	background-color: #EEE;
+	border-radius: 10px;
+	padding: 14px 30px;
+
+	font: 16px/150% Georgia, Times, 'Times New Roman', serif;
+	text-indent: 20px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+	color: #444;
+}
+
+figure {
+    margin: 50px 0;
+}
+
+figure img, figure video {
+	min-width: 50px;
+	max-width: 100%;
+
+	display: block;
+	margin: 0 auto;
+
+	border: 1px solid #666;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+figcaption {
+    margin-top: .5em;
+    font-style: italic;
+    text-align: center;
+}
+
+section + section {
+	margin-top: 50px;
+}
+
+section h1 {
+	font: bold 26px 'Verdana', sans-serif;
+}
+
+section a {
+	font-weight: bold;
+	color: #44F;
+}
+
+section a:hover {
+	color: #00C;
+}
+
+section dt {
+	font-weight: bold;
+}
+
+section dd + dt {
+	margin-top: .5em;
+}
+
+code {
+	font: 16px 'Consolas', 'Courier New', monospace;
+	color: #EEE;
+    background-color: #555;
+	
+	box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+
+    padding: 1em;
+    margin: 1.2em 0;
+    display: block;
+
+    white-space: pre;
+    overflow: auto;
+    line-height: 1.3em;
+    text-indent: 0;
+}
+
+footer {
+	font: italic 14px Arial, sans-serif;
+	color: #777;
+	text-align: right;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+	padding: 20px 30px;
+}
+
+footer a {
+	color: inherit;
+	text-decoration: none;
+}

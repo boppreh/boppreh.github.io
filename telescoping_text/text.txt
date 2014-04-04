@@ -1,0 +1,159 @@
+<h1>[1:Chomsky]</h2>
+
+<p>[aak:Chomsky é um mago.]</p>
+-----
+1: [2:A História de Chomsky]
+2: A História [3:de Chomsky Greibach]
+3: do Mago [4:Chomsky Greibach]
+4: Chomsky Greibach, [5:de Whistledown]
+5: o [6:Gnomo] de Whistledown
+6: Gnomo Renegado
+
+aa: Todo gnomo possui vários nomes. [ab:Este é conhecido entre os humanos como Chomsky Greibach].
+ab: Esses nomes são dados pela família, amigos, comunidade, ou adotados por capricho. Este é conhecido entre os humanos como Chosmky Greibach[ac:, mas ele possui outros nomes entre os amigos]
+ac: . Os amigos o chamam de Felix Bignoodle, Hands Magee, Nibbles [ad:T.] McGibbles, Dimble Mocklaw e Fenthwick Fizzlebang. Cada nome possui uma longa história, e ele adora contá-las. Não pergunte se não tiver tempo de sobra
+ad: Tibbles
+
+ba: Chomsky é natural de Whistledown[bb:, que fica no sul de Varisia.] [bc:Lá existem gnomos e humanos.]
+bb: . A cidade fica no sul de Varisia, na ligação do lago Syrantula e o rio Yondabakari. Embora fique entre Korvosa e Magnimar, Whistledown não é afiliada com nenhuma das duas cidades.
+bc: Ela é lar para humanos e gnomos, que vivem pacificamente. Seus instrumentos musicais são famosos, alguns por sua alta qualidade, e outros por suas características intrigantes.
+
+ca: [cb: Chomsky tem 64 anos]. [ce:Seu pai era um mago.] [cf:Chomsky sempre amou o assunto.]
+cb: Chomsky [cc:nasceu em 23 de Sarenith de 4643 AR]
+cc: nasceu em 23 de Sarenith de 4643 AR, [cd:filho de Arv Jalligrub]
+cd: filho de Arv Jalligrub. Sua mãe era dona da estalagem A Taça Azul
+ce: Sua família não era rica, mas os lucros da estalagem permitiram que seu pai Rondo Dimbuckle se tornasse um estudioso do reino arcano.
+cf: Desde criança Chomsky era fascinado pelo assunto, brincando de ventriloquismo ou colorindo o gato da família.
+
+da: Chomsky era vítima de algumas [db:brincadeiras por outros gnomos]. [dc:Ele preferia estudar o reino arcano].
+db: brincadeiras por outros gnomos. Ele sempre foi fraco, mesmo para o padrão dos gnomos, mas aprendeu a usar a magia para não se machucar
+dc: Enquanto a maioria dos seus colegas produziam armas ou poções em seu tempo livre, ele preferia estudar o reino arcano
+
+ea: [eb:Chomsky se tornou um mago da escola de conjuração.]
+eb: [ec:Chomsky estudou muito para se tornar um mago.] [ed:Ele se especializou na escola de conjuração.]
+ec: Após muitos anos de estudo Chomsky se tornou um legítimo mago arcano.
+ed: A escola de conjuração é sua paixão[ef:, e ele faz uso de suas magias diariamente.]
+ef: . Ele usa magias para criar colheres para seu café, arrumar canecas quebradas, reposicionar objetos ou criar fantasmas para assustar os incautos.
+
+fa: [fb:Ele preparou uma enorme pegadinha.] [fc:Ele foi expulso pelo incidente resultante.] [fe:Chomsky viaja aprendendo novas línguas e magias.]
+fb: Em 4682 AR Chomsky passou meses preparando o que ele considerava a maior pegadinha da história.
+fc: Os residentes de Whistledown, especialmente os humanos, o expulsaram pelo [ff:incidente resultante]. [fd:Ele partiu para explorar Varisia.]
+fd: Seus pais lhe deram uma moeda de prata como lembrança, e o arrasado Chomsky partiu para conhecer os segredos de Varisia.
+fe: Estudioso dedicado, ele aproveitou a oportunidade para aprender novas línguas e magias. Em pouco tempo ele já era poliglota.
+ff: [fg:resultante incidente]
+fg: [fh:i n c i d e n t e]
+fh: [ff:incidente resultante]
+
+ga: [gb:Para se defender de bandidos Chomsky aprendeu a usar magias de forma ofensiva.] [gc:Ele também comprou e praticou muito com uma besta.]
+gb: [gd:Chomsky era vítima constante de bandidos.] [ge:Ele foi obrigado a aprender a contra-atacar com magias para se defender.]
+gc: [gf:Nem sempre as magias eram o bastante.] [gh:Chomsky comprou uma besta e treinou muito.]
+gd: Chomsky passou por mau bocados na estrada. Sua baixa estatura e força física o tornava alvo de bandidos e ele teve de aprender a se defender.
+ge: Seus primeiros esforços foram em atordoar os oponentes. Quando isso não era o bastante, ele começou a contra-atacar: ácido e gelo eram suas armas, e mais tarde mísseis mágicos.
+gf: O problema é que estes truques só funcionavam depois que ele era atacado; o objetivo era evitar os ataques completamente.
+gh: Então Chomsky usou suas economias para comprar uma besta, e passava as tardes brincando de tiro ao alvo. [gi:A presença da besta funcionou muito bem.]
+gi: A presença da arma e sua mira extraordinária foram suficientes para evitar a maioria dos ataques.
+
+ia: [ib: Ele é fascinado por teleportação.] [ic:Chomsky a usa para as mais diversas tarefas.] [id:Ele nunca gostou de necromancia e não tem prática com abjuração.] [ie:Seus pesadelos são estranhos.]
+ib: A fascinação com transposição de objetos surgiu na estrada.
+ic: Chomsky a usa desde as formas mais mundanas, como ajustar a posição do saco de dormir, até para fugir de bandidos.
+id: Em contra partida algumas escolas nunca o interessaram: necromancia o enoja, e ele nunca teve conflitos com outros magos para aprender abjurações.
+ie:Ele suspeita que seus pesadelos com cubos gelatinosos são frutos de alguma maldição.
+
+ha: [hb:Chomsky possui um elo mágico com o corvo Edgar.]
+hb: [hc:Chomsky adotou o corvo Edgar.] [hd:Edgar tem uma personalidade forte.]
+hc: Foi nessa época que Chomsky adotou Edgar, o corvo, ainda filhote. Os dois logos criaram uma amizade, que com o tempo se tornou um laço mágico.
+hd: [he:Edgar tem medo de crianças e] [hf:se acha mais inteligente que seu mestre.]
+he: Edgar tem pavor de crianças, então quando estão em alguma cidade ele se esconde nas dobras da roupa ou na mochila de Chomsky. Ele
+hf: é orgulhoso, insistindo que é mais inteligente que seu mestre. Chomsky acha isso hilário e o incentiva.
+
+ja: [jb:Chomsky estuda o império Thassalão.] [jc:Ele está indo a Sandpoint para estudar mais.] [jd:O antigo farol o interessa bastante...]
+jb: Recentemente Chomsky começou a estudar história, especialmente o antigo império Thassalão.
+jc: Ele está viajando para Sandpoint a fim de desventar os segredos deste reino perdido.
+jd: Chomsky quer visitar o Grande Farol e entender os acontecimentos suspeitos na cidade...
+
+aaa: [aa:Seu nome é Chomsky Greibach.]</p><p>[ba: Chomsky é de Whistledown.]
+aab: [aaa: Chomsky Greibach é de Whistledown.]</p><p>[ca: Chomsky é filho de um mago.]
+aac: [da:Chomsky era vítima de brincadeiras, e preferia estudar o reino arcano.]</p><p>[ea:Chomsky é um mago.]
+aad: [aab:Chomsky Greibach é filho de um mago de Whistledown.]</p><p>[aac:Chomsky é um mago estudioso.]
+aae: [aad:Chomsky era um mago de Whistledown.]</p><p>[fa:Ele foi expulso.]
+aaf: [aae:Chomsky é um mago renegado de Whistledown.]<p><p>[ga:Na estrada ele aprendeu a usar bestas.]
+aag: [aaf:Chomsky era um hábil mago de Whistledown.]</p><p>[ia:Chomsky é especialista em teleportação.]
+aah: [ha:Seu familiar é o corvo Edgar]</p><p>[ja:Ele está indo estudar Sandpoint.]
+aai: [aag:Chomsky era um mago de Whistledown, especialista em teleportação.]</p><p>[aah:Junto com seu corvo Edgar ele quer estudar Sandpoint.]
+aaj: [aai:Chomsky é um mago especialista em teleportação. Ele quer estudar Sandpoint.]
+aak: [aaj:Chomsky é um mago visitando Sandpoint.]
+-----
+Chomsky Greibach: chomsky.pdf
+Edgar: edgar.pdf
+
+Varisia: http://pathfinderwiki.com/wiki/Varisia
+Sandpoint: http://pathfinderwiki.com/wiki/Sandpoint
+Whistledown: http://pathfinderwiki.com/wiki/Whistledown
+Korvosa: http://pathfinderwiki.com/wiki/Korvosa
+Magnimar: http://pathfinderwiki.com/wiki/Magnimar
+Gnomo: http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/gnomes.html
+Mago: http://paizo.com/prd/classes/wizard.html
+Escola: http://paizo.com/prd/classes/wizard.html#arcane-school
+Conjuração: http://paizo.com/pathfinderRPG/prd/magic.html#_conjuration
+
+colegas produziam armas ou poções: http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/gnomes.html#obsessive
+
+ele preferia estudar o reino arcano: http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/gnomes.html#academician
+
+brincando de ventriloquismo ou colorindo o gato da família: http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/gnomes.html#gnome-magic
+
+sempre foi fraco: http://paizo.com/prd/gettingStarted.html#strength
+
+padrão dos gnomos: http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/gnomes.html#gnome-racial-traits
+
+usar a magia para não se machucar: http://paizo.com/pathfinderRPG/prd/classes.html#_favored-class
+
+vítima de algumas brincadeiras: http://paizo.com/pathfinderRPG/prd/advancedRaceGuide/coreRaces/gnomes.html#gnome-racial-traits
+
+esferas de ácido: http://paizo.com/prd/spells/acidSplash.html
+
+engraixar o chão: http://paizo.com/prd/spells/grease.html
+
+criar colheres: http://paizo.com/prd/spells/prestidigitation.html
+arrumar a caneca quebrada: http://paizo.com/prd/spells/mending.html
+reposicionar objetos na casa: http://paizo.com/prd/spells/prestidigitation.html
+
+criar fantasmas: http://paizo.com/prd/spells/silentImage.html
+
+conhecer os segredos: http://paizo.com/pathfinderRPG/prd/advanced/advancedNewRules.html#_outlander
+
+conhecer novas línguas e magias: http://www.d20pfsrd.com/traits/campaign-traits/rise-of-the-runelords/outlander#TOC-Lore-Seeker
+
+poliglota: http://paizo.com/prd/skills/linguistics.html
+
+atordoar: http://paizo.com/prd/spells/daze.html
+
+ácido: http://paizo.com/prd/spells/acidSplash.html
+
+gelo: http://paizo.com/prd/spells/rayOfFrost.html
+
+mísseis mágicos: http://paizo.com/prd/spells/magicMissile.html
+
+corvo: http://paizo.com/prd/monsters/familiar.html#raven
+
+laço mágico: http://paizo.com/prd/classes/wizard.html#familiars
+
+besta: http://paizo.com/prd/equipment.html#table-6-4-weapons
+
+mira extraordinária: http://paizo.com/prd/gettingStarted.html#dexterity
+
+necromancia: http://paizo.com/prd/classes/wizard.html#necromancy-school
+
+abjurações: http://paizo.com/prd/classes/wizard.html#abjuration-school
+abjuração: http://paizo.com/prd/classes/wizard.html#abjuration-school
+
+algumas escolas nunca o interessaram: http://paizo.com/prd/classes/wizard.html#arcane-school
+
+cubos gelatinosos: http://paizo.com/PRD/monsters/gelatinousCube.html
+
+império Thassalão: http://pathfinderwiki.com/wiki/Thassilon
+
+fascinação com transposição de objetos: http://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo---arcane-schools/classic-arcane-schools/conjuration/teleportation
+-----
+Anotações livres:
+
