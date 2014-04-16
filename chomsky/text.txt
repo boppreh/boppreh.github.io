@@ -61,7 +61,7 @@ ie:Ele suspeita que seus pesadelos com cubos gelatinosos são frutos de alguma m
 
 ha: [hb:Chomsky possui um elo mágico com o corvo Edgar.]
 hb: [hc:Chomsky adotou o corvo Edgar.] [hd:Edgar tem uma personalidade forte.]
-hc: Foi nessa época que Chomsky adotou Edgar, o corvo, ainda filhote. Os dois logos criaram uma amizade, que com o tempo se tornou um laço mágico.
+hc: Foi nessa época que Chomsky adotou Edgar, o corvo, ainda filhote. Os dois logo criaram uma amizade, que com o tempo se tornou um laço mágico.
 hd: [he:Edgar tem medo de crianças e] [hf:se acha mais inteligente que seu mestre.]
 he: Edgar tem pavor de crianças, então quando estão em alguma cidade ele se esconde nas dobras da roupa ou na mochila de Chomsky. Ele
 hf: é orgulhoso, insistindo que é mais inteligente que seu mestre. Chomsky acha isso hilário e o incentiva.
