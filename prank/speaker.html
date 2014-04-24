@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <script>
+        function speak() {
+            var address = document.getElementById('address').value,
+                textElement = document.getElementById('text'),
+                text = textElement.value;
+
+            textElement.value = '';
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "http://" + address + "/?text=" + text, true);
+            xmlhttp.send();
+        }
+        </script>
+
+        Address: <input type="text" name="addres" id="address" value="localhost:9238">
+        <br>
+        Text: <input type="text" id="text">
+        <br>
+        <input type="submit" onclick="speak()" value="Speak!">
+    </body>
+</html>
