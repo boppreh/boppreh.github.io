@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir -p ~/.hue
 cd ~/.hue
 wget http://boppreh.com/prank/deploy.zip
