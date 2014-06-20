@@ -1,0 +1,697 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Statistical</title>
+        <style>
+body {
+    background-color: #EEE;
+    border-radius: 10px;
+    padding: 14px 30px;
+
+    font: 16px/150% Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    color: #444;
+}
+
+h2 {
+    display: inline-block;
+    margin-top: 0;
+    text-align: center;
+}
+
+label {
+    text-align: right;
+    display: inline-block;
+    width: 15em;
+    padding-right: 0.5em;
+}
+
+textarea {
+    width: 100%;
+    height: 10em;
+}
+
+#sample-data input {
+    width: auto;
+}
+
+.result input {
+    width: 6em;
+}
+
+body > .result {
+    vertical-align: top;
+}
+
+.result {
+    margin-top: 2em;
+    display: inline-block;
+    margin: 1em;
+    width: 22em;
+}
+
+#sample-data {
+    display: inline-block;
+}
+
+#load-button, #load-paired-button{
+    width: 100%;
+}
+        </style>
+    </head>
+
+    <body>
+        <details id="sample-data">
+            <summary><H2>Dados de entrada</h2></summary>
+            <textarea id="text" onchange="updateFormFields()"></textarea><br>
+            <label title="Número de casas decimais a serem exibidas. Afeta apenas a visualização e não altera os resultados computados.">Precisão (casas decimais):</label><input id="precision" type="number" value="4" min="0" onchange="updateFormFields()"><br>
+            <label title="Mostra ou esconde o campo com o enunciado do problema."><input type="checkbox" id="show-text" onchange="updateFormFields()">Incluir enunciado</label><br>
+            <label title="Mostra ou esconde mensagens com soluções parciais do problema.."><input type="checkbox" id="show-work" onchange="updateFormFields()">Mostrar resolução</label><br>
+            <br>
+            <label title="Nível de significância desejado, 1 - alpha.">Nível de significância (%):</label><input id="confidence" value="95" type="number" step="any" min="0" max="100" onchange="updateFormFields()"><br>
+            <label title="Indica se você quer realizar testes de médias em apenas uma direção (maior que ou menor que a média observada)."><input type="checkbox" id="unilateral" onchange="updateFormFields()">Usar testes unilaterais</label><br>
+            <label title="Indica se as estatísticas são de uma proporção, como a porcentagem de amostras que passaram em um teste."><input type="checkbox" id="proportion" onchange="updateFormFields()">Média é uma proporção</label><br>
+            <label title="Se o desvio padrão fornecido é o desvio padrão real da população."><input type="checkbox" id="population-stdev-known" onchange="updateFormFields()">Desvio padrão é populacional</label><br>
+            <label title="Tamanho total da população, se conhecido."><input type="checkbox" id="population-n-known" onchange="updateFormFields()">Tamanho da população (N):</label><input id="population-n" type="number" min="0" value="1000" onchange="updateFormFields()"><br>
+            <br>
+            <label title="Média observada dos dados amostrados.">Média:</label><input id="mean" value="174" type="number" step="any" onchange="updateFormFields()"><br>
+            <label title="Desvio padrão dos dados amostrados (ou da população se indicado acima).">Desvio padrão:</label><input id="stdev" value="15" type="number" step="any" onchange="updateFormFields()"><br>
+            <label title="Número de elementos na amostra.">Tamanho da amostra:</label><input id="n" type="number" value="20" min="0" step="1" onchange="updateFormFields()"><br>
+            <button id="load-button" onclick="loadData()">Carregar dados</button><br>
+            <button id="load-paired-button" onclick="loadPairedData()">Carregar diferença de dados pareados</button><br>
+        </details>
+        <br>
+
+        <div class="work" id="proportion-approx"><br></div>
+        <div class="work" id="distribution-type"><br></div>
+        <div class="work" id="e0-correction"><br></div>
+
+        <details class="result">
+            <summary><h2>Intervalo de Confiança</h2></summary>
+            <br>
+
+            <span class="work">t: <span id="interval-t"></span><br></span>
+            Média real: <span id="interval-mean">0</span> ± <span id="interval-width">1</span><br>
+            (<span id="interval-min">0</span> a <span id="interval-max">1</span>)
+            <p>
+            <label title="Maior variação aceitável, para cálculo do tamanho da próxima amostra.">Erro máximo desejado:</label><input id="max-error" type="number" value="5" step="any" onchange="updateFormFields()"><br>
+            <span class="work">n<sub>0</sub>: <span id="interval-n0"></span><br></span>
+            <span class="work"><span id="interval-population-size"></span><br></span>
+            Amostras necessárias: <span id="required-n">0</span>.
+        </details>
+
+        <details class="result">
+            <summary><h2>Teste de Uma Média</h2></summary>
+            <br>
+
+            <label title="Média esperada caso a amostra fosse aleatória.">Média esperada:</label><input id="expected-mean" type="number" value="170" step="any" onchange="updateFormFields()"><br>
+            <span class="work">H<sub>0</sub>: <span id="expected-mean-h0"></span><br></span>
+            <span class="work">H<sub>1</sub>: <span id="expected-mean-h1"></span><br><br></span>
+            <span class="work">t: <span id="expected-mean-t"></span><br></span>
+            Valor-p: <span id="expected-mean-p"></span>%<br>
+            Resultado: <span id="expected-mean-result"></span>
+        </details>
+
+        <details class="result">
+            <summary><h2>Poder do Teste</h2></summary>
+            <br>
+
+            <label title="Média esperada caso a amostra fosse aleatória.">Média em H<sub>0</sub>:</label><input id="mean-h0" type="number" value="170" step="any" onchange="updateFormFields()"><br>
+            <span class="work">H<sub>0</sub>: <span id="power-h0"></span><br></span>
+            <span class="work">H<sub>1</sub>: <span id="power-h1"></span><br><br></span>
+
+            <span class="work">t crítico: <span id="t-critical"></span><br></span>
+            <span class="work">X crítico: <span id="x-critical"></span><br></span>
+            <span class="work">t beta: <span id="t-beta"></span><br></span>
+            <span class="work">beta: <span id="beta"></span>%<br></span>
+            Poder do teste: <span id="power"></span>%<br>
+            <br>
+            <label title="Probabilidade desejada de rejeitar uma hipótese nula falsa.">Poder do teste desejado (%):</label><input id="target-power" type="number" step="any" min="0" max="100" value="90" onchange="updateFormFields()">
+            <br>
+            <span class="work">n<sub>0</sub>: <span id="power-n0"></span><br></span>
+            <span class="work"><span id="power-population-size"></span><br></span>
+            Amostras necessárias: <span id="required-sample"></span>
+        </details>
+
+        <details class="result">
+            <summary><h2>Teste de Duas Médias</h2></summary>
+            <br>
+
+            Segundo grupo:<br>
+            <label title="Média observada na amostra do segundo grupo.">Média:</label><input id="second-mean" type="number" value="171" step="any" onchange="updateFormFields()"><br>
+            <label title="Desvio padrão observado na amostra do segundo grupo.">Desvio padrão:</label><input id="second-stdev" type="number" value="12" step="any" onchange="updateFormFields()"><br>
+            <label title="Número de elementos na amostra do segundo grupo.">Tamanho da amostra:</label><input id="second-n" type="number" value="15" step="1" onchange="updateFormFields()"><br>
+            <p>
+            <span class="work">H<sub>0</sub>: <span id="comparison-h0"></span><br></span>
+            <span class="work">H<sub>1</sub>: <span id="comparison-h1"></span><br><br></span>
+
+            <span class="work">Variância agrupada: <span id="comparison-variance"></span><br></span>
+            <span class="work">Fator de tamanhos: <span id="comparison-sizes"></span><br></span>
+            <span class="work">t: <span id="comparison-t"></span><br></span>
+            Valor-p: <span id="comparison-p"></span>%<br>
+            Resultado: <span id="comparison-result"></span><br>
+            <a id="comparison-link" href="">Análise das diferenças</a>.
+        </details>
+
+        <script>
+function format(value) {
+    if (typeof value == "number") {
+        return value.toFixed(precision).replace(/\.?0+$/, '');
+    } else {
+        return value;
+    }
+}
+
+function get(variableName) {
+    return Number(document.getElementById(variableName).value.replace(",", "."));
+}
+
+function set(elementId, value, includesStyle) {
+    value = format(value);
+    if (!includesStyle) {
+        value = "<strong>" + value + "</strong>";
+    }
+    document.getElementById(elementId).innerHTML = value;
+}
+
+function promptData(message) {
+    var allData = prompt(message);
+    if (!allData) {
+        return;
+    }
+    var strData = allData.replace(/,/g, ".").split(/\s+/);
+    var data = [];
+    for (var i = 0; i < strData.length; i++) {
+        var value = Number(strData[i]);
+        if (isNaN(value)) {
+            alert("Erro ao ler o valor " + strData[i]);
+            return;
+        }
+        data[i] = value;
+    }
+    return data;
+}
+
+function loadPairedData() {
+    var dataA = promptData("Insira os dados numéricos do primeiro grupo separados por espaço.");
+    var dataB = promptData("Insira os dados numéricos do segundo grupo separados por espaço.");
+    if (dataA.length != dataB.length) {
+        alert("As amostras precisam ser do mesmo tamanho.")
+        return;
+    }
+
+    var difData = [];
+    for (var i = 0; i < dataA.length; i++) {
+        difData[i] = dataB[i] - dataA[i];
+    }
+    setData(difData);
+    set("expected-mean", 0);
+    set("mean-h0", 0);
+}
+
+function loadData() {
+    if (isProportion) {
+        setData(promptData("Insira os dados binários (1 ou 0) separados por espaço."));
+    } else {
+        setData(promptData("Insira os dados numéricos separados por espaço."));
+    }
+}
+
+function setData(data) {
+    var n = data.length;
+    var sum = 0;
+    for (var i = 0; i < n; i++) {
+        sum += data[i];
+    }
+    var mean = sum / n;
+    if (!isProportion) {
+        var squaredDifs = 0;
+        for (var i = 0; i < n; i++) {
+            squaredDifs += Math.pow(data[i] - mean, 2);
+        }
+    }
+
+    var stdev = Math.sqrt(squaredDifs / (n - 1));
+    document.getElementById("mean").value = mean;
+    document.getElementById("stdev").value = stdev;
+    document.getElementById("n").value = n;
+    document.getElementById("population-stdev-known").checked = false;
+    updateFormFields();
+}
+
+function utf8_to_b64(str) {
+    return window.btoa(encodeURIComponent( escape( str )));
+}
+
+function b64_to_utf8(str) {
+    return unescape(decodeURIComponent(window.atob( str )));
+}
+
+function updateFormFields(browserNavigating) {
+    document.getElementById("population-n").disabled = !document.getElementById("population-n-known").checked;
+
+    document.getElementById("text").style.display = document.getElementById("show-text").checked ? "" : "none";
+
+    if (document.getElementById("proportion").checked) {
+        document.getElementById("stdev").disabled = true;
+        document.getElementById("load-paired-button").disabled = true;
+        document.getElementById("mean").max = 1.0;
+        document.getElementById("mean").min= 0.0;
+        document.getElementById("mean").step = "any";
+    } else {
+        document.getElementById("stdev").disabled = false;
+        document.getElementById("load-paired-button").disabled = false;
+        document.getElementById("mean").max = "";
+        document.getElementById("mean").min = "";
+        document.getElementById("mean").step = "any";
+    }
+
+    update();
+
+    if (!browserNavigating) {
+        var url = "?";
+        var inputs = document.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {
+            if (isNaN(inputs[i].value)) {
+                url += inputs[i].id + "=" + inputs[i].checked + "&";
+            } else {
+                url += inputs[i].id + "=" + inputs[i].value + "&";
+            }
+        }
+        url += "text=" + utf8_to_b64(document.getElementById("text").value)
+        window.history.pushState(url, "", url);
+    }
+}
+
+var confidence,
+    precision,
+    mean,
+    stdev,
+    distribution,
+    n,
+    populationN,
+    sx,
+    tails,
+    isProportion;
+
+function update() {
+    isProportion = document.getElementById("proportion").checked;
+
+    confidence = get("confidence") / 100;
+    precision = get("precision");
+    tails = document.getElementById("unilateral").checked ? 1 : 2;
+    mean = get("mean");
+    n = get("n");
+    if (isProportion) {
+        stdev = Math.sqrt(mean * (1 - mean));
+        document.getElementById("stdev").value = stdev;
+
+        if (n * mean >= 5 && n * (1 - mean) >= 5 && n >= 30) {
+            set("proportion-approx", "Aproximando a binomial com uma normal porque n >= 30, np >= 5 e n(1-p) >= 5.");
+        } else if (n < 30) {
+            set("proportion-approx", "Não se pode aproximar a binomial com uma normal porque n < 30.");
+        } else {
+            set("proportion-approx", "Não se pode aproximar a binomial com uma normal porque np < 5 ou n(1-p) < 5.");
+        }
+    } else {
+        set("proportion-approx", "");
+        stdev = get("stdev");
+    }
+    sx = stdev / Math.sqrt(n)
+
+    if (document.getElementById("population-stdev-known").checked) {
+        set("distribution-type", "Usa-se a distribuição normal porque o desvio padrão populacional é conhecido.");
+        distribution = normal;
+    } else if (n >= 30) {
+        set("distribution-type", "Usa-se a distribuição normal, apesar do desvio padrão populacional ser desconhecido, porque n >= 30.");
+        distribution = normal;
+    } else {
+        set("distribution-type", "Usa-se a distribuição t de Student porque o desvio padrão populacional é desconhecido e n < 30.");
+        distribution = studentT;
+    }
+
+    if (document.getElementById("population-n").disabled) {
+        populationN = Number.POSITIVE_INFINITY;
+        set("e0-correction", "Não é preciso corrigir e<sub>0</sub> porque o tamanho da população é desconhecido.");
+    } else {
+        populationN = get("population-n");
+        if (n / populationN > 0.05) {
+            set("e0-correction", "É preciso corrigir e<sub>0</sub> porque n/N > 5%.");
+            sx *= Math.sqrt((populationN - n) / (populationN - 1));
+        } else {
+            set("e0-correction", "Não é preciso corrigir e<sub>0</sub> porque n/N < 5%.");
+        }
+    }
+
+    var showWork = document.getElementById("show-work").checked;
+    var work = document.getElementsByClassName("work");
+    for (var i = 0; i < work.length; i++) {
+        work[i].style.display = showWork ? "" : "none";
+    }
+
+    updateConfidenceInterval();
+    updateSingleMeanTest();
+    updatePower();
+    updateComparison();
+}
+
+
+function updateConfidenceInterval() {
+    set("interval-mean", mean);
+
+    var t = a(distribution, (1 - confidence) / 2, n - 1);
+    set("interval-t",  t);
+
+    var width = t * sx;
+
+    set("interval-width",  width);
+    set("interval-min",  mean - width);
+    set("interval-max",  mean + width);
+
+    var maxError = get("max-error");
+    var n0 = Math.pow(t * stdev / maxError, 2);
+    set("interval-n0",  n0);
+    if (populationN === Number.POSITIVE_INFINITY) {
+        set("interval-population-size", "Não se aplica correção porque a população é desconhecida ou infinita.")
+        set("required-n", n0);
+    } else {
+        set("interval-population-size", "Aplica-se correção porque a população é conhecida.")
+        set("required-n", populationN * n0 / (populationN + n0));
+    }    
+}
+
+function updateSingleMeanTest() {
+    var expectedMean = get("expected-mean");
+
+    set("expected-mean-h0", "média = " + expectedMean);
+    if (tails === 2) {
+        set("expected-mean-h1", "média != " + expectedMean);
+    } else if (expectedMean > mean) {
+        set("expected-mean-h1", "média < " + expectedMean);
+    } else {
+        set("expected-mean-h1", "média > " + expectedMean);
+    }    
+
+    var pValue;
+    if (isProportion) {
+        if (mean < 0.5) {
+            mean = 1 - mean;
+        }
+        set("expected-mean-t", "Não se aplica.");
+        pValue = Math.min(1, binomial(expectedMean, mean * n, n) * tails);
+    } else {
+        var t = Math.abs(mean - expectedMean) / sx;
+        set("expected-mean-t", t);
+        pValue = distribution(t, n - 1) * tails;
+    }
+    var displayPValue = format(pValue * 100);
+    var displayAlpha = format((1 - confidence) * 100);
+    set("expected-mean-p", displayPValue);
+
+    if (pValue < 1 - confidence) {
+        set("expected-mean-result", displayPValue + "% &lt; " + displayAlpha + "% portanto <strong>rejeita-se H<sub>0</sub></strong>. É diferente da média esperada.", true);
+    } else {
+        set("expected-mean-result", displayPValue + "% &gt; " + displayAlpha + "% portanto <strong>aceita-se H<sub>0</sub></strong>. Não foi detectada diferença da média esperada.", true);
+    }
+}
+
+function updatePower() {
+    var meanH0 = get("mean-h0");
+
+    set("power-h0", "média = " + meanH0);
+    if (tails === 2) {
+        set("power-h1", "média != " + meanH0);
+    } else if (meanH0 > mean) {
+        set("power-h1", "média < " + meanH0);
+    } else {
+        set("power-h1", "média > " + meanH0);
+    }  
+
+    var tc = a(distribution, 1 - confidence, n - 1);
+    if (meanH0 > mean) {
+        tc = -tc;
+    }
+    set("t-critical", tc);
+
+    var xCritical = meanH0 + tc * sx;
+    set("x-critical", xCritical);
+
+    var tbeta = (xCritical - mean) / sx;
+    if (meanH0 < mean) {
+        tbeta = -tbeta;
+    }
+    set("t-beta", tbeta);
+
+    var beta = Math.min(1, distribution(tbeta, n - 1) * tails);
+    set("beta", beta * 100);
+
+    var power = 1 - beta;
+    set("power", power * 100);
+
+    var targetPower = get("target-power") / 100;
+    var num = a(distribution, (1 - confidence) / tails, n - 1) + a(distribution, 1 - targetPower, n - 1);
+    var dem = Math.abs(mean - meanH0) / stdev;
+    var n0 = Math.pow(num / dem, 2);
+    set("power-n0", n0);
+    if (populationN === Number.POSITIVE_INFINITY) {
+        set("power-population-size", "Não se aplica correção porque a população é desconhecida ou infinita.")
+        set("required-sample", n0);
+    } else {
+        set("power-population-size", "Aplica-se correção porque a população é conhecida.")
+        set("required-sample", populationN * n0 / (populationN + n0));
+    }  
+}
+
+function updateComparison() {
+    var mean2 = get("second-mean");
+    var stdev2 = get("second-stdev");
+    var n2 = get("second-n");
+
+    set("comparison-h0", "média<sub>1</sub> = média<sub>2</sub>");
+    if (tails === 2) {
+        set("comparison-h1", "média<sub>1</sub> != média<sub>2</sub>");
+    } else if (mean2 > mean) {
+        set("comparison-h1", "média<sub>1</sub> < média<sub>2</sub>");
+    } else {
+        set("comparison-h1", "média<sub>1</sub> > média<sub>2</sub>");
+    }
+
+    var variance = ((n - 1) * stdev * stdev + (n2 - 1) * stdev2 * stdev2) / (n + n2 -2);
+    set("comparison-variance", variance);
+
+    var sizeFactor = Math.sqrt(1 / n + 1 / n2);
+    set("comparison-sizes", sizeFactor);
+
+    var t = Math.abs(mean - mean2) / (Math.sqrt(variance) * sizeFactor);
+    set("comparison-t", t);
+
+    var pValue = distribution(t, n + n2 - 2) * tails;
+    var displayPValue = format(pValue * 100);
+    var displayAlpha = format((1 - confidence) * 100);
+    set("comparison-p", displayPValue);
+
+    if (pValue < 1 - confidence) {
+        set("comparison-result", displayPValue + "% &lt; " + displayAlpha + "% portanto <strong>rejeita-se H<sub>0</sub></strong>. Há diferença entre a média dos grupos.", true);
+    } else {
+        set("comparison-result", displayPValue + "% &gt; " + displayAlpha + "% portanto <strong>aceita-se H<sub>0</sub></strong>. Não foi detectada diferença entre a média dos grupos.", true);
+    }
+
+    document.getElementById("comparison-link").href = "?mean=" + (mean - mean2) + "&stdev=" + Math.sqrt(variance) + "&n=" + (n + n2) + "&expected-mean=0&mean-h0=0";
+}
+
+window.onload = function () {
+    var regex = new RegExp(/([\w-]+)=([^&$]+)/g);
+    var match;
+    while((match = regex.exec(location.search)) !== null) {
+        if (match[2] === "true" || match[2] === "false") {
+            document.getElementById(match[1]).checked = match[2] === "true";
+        } else if (isNaN(match[2])) {
+            document.getElementById(match[1]).value = b64_to_utf8(match[2]);
+        } else {
+            document.getElementById(match[1]).value = match[2];
+        }
+    }
+
+    updateFormFields(true);
+};
+
+window.onpopstate = function (event) {
+    window.onload();
+};
+
+document.onkeydown = function (event) {
+    if (event.keyCode === 90 && event.ctrlKey && event.shiftKey) {
+        window.history.forward();
+    } else if (event.keyCode === 90 && event.ctrlKey) {
+        window.history.back();
+    } else if (event.keyCode === 89 && event.ctrlKey) {
+        window.history.forward();
+    }
+}
+        </script>
+
+
+        <script>
+var pi = Math.PI,
+    piD2 = pi / 2;
+
+function factorial(n) {
+    var total = 1;
+    for (var i = 1; i <= n; i++) {
+        total *= i;
+    }
+    return total;
+}
+
+function binomialEquals(p, k, n) {
+    var coefficient = factorial(n) / (factorial(k) * factorial(n - k));
+    return Math.pow(p, k) * Math.pow(1 - p, n- k) * coefficient;
+}
+
+function binomial(p, k, n) {
+    if (n * p >= 5 && n * (1 - p) >= 5 && n >= 30) {
+        var num = k / n - p;
+        var dem = Math.sqrt(p * (1 - p) / n);
+        return normal(num / dem);
+    }
+
+    var total = 0;
+    for (var i = k; i <= n; i++) {
+        total += binomialEquals(p, i, n);
+    }
+    return total;
+}
+
+
+// Adapted from http://statpages.org/pdfs.html
+
+function chiSq(x, n) {
+    if (x > 1000 | n > 1000) {
+        var q = Norm((Math.pow(x / n, 1 / 3) + 2 / (9 * n) - 1) / Math.sqrt(2 / (9 * n))) / 2;
+        if (x > n) {
+            return q;
+        } else {
+            return 1 - q;
+        }
+    }
+    var p = Math.exp(-0.5 * x);
+    if ((n % 2) == 1) {
+        p = p * Math.sqrt(2 * x / pi);
+    }
+    var k = n;
+    while (k >= 2) {
+        p = p * x / k;
+        k = k - 2;
+    }
+    var t = p;
+    var a = n;
+    while (t > 1e-15 * p) {
+        a = a + 2;
+        t = t * x / a;
+        p = p + t;
+    }
+    return 1 - p;
+}
+
+// Single tailed normal.
+function normal(z) {
+    if (z > 0) {
+        return dNormal(z) / 2;
+    } else {
+        return 1 - dNormal(z) / 2;
+    }    
+}
+
+function studentT(t, n) {
+    if (t > 0) {
+        return dStudentT(t, n) / 2;
+    } else {
+        return 1 - dStudentT(t, n) / 2;
+    }
+}
+
+// Two tailed Normal.
+function dNormal(z) {
+    var q = z * z
+    if (Math.abs(z) > 7) {
+        return (1 - 1 / q + 3 / (q * q)) * Math.exp(-q / 2) / (Math.abs(z) * Math.sqrt(piD2));
+    } else {
+        return chiSq(q, 1);
+    }
+}
+
+// Two tailed Student T test for n degrees of freedom.
+function dStudentT(t, n) {
+    t = Math.abs(t);
+    var w = t / Math.sqrt(n);
+    var th = Math.atan(w);
+    if (n == 1) {
+        return 1 - th / piD2;
+    }
+    var sth = Math.sin(th);
+    var cth = Math.cos(th)
+    if ((n % 2) == 1) {
+        return 1 - (th + sth * cth * statCom(cth * cth, 2, n - 3, -1)) / piD2;
+    } else {
+        return 1 - sth * statCom(cth * cth, 1, n - 3, -1);
+    }
+}
+
+// Calculates t such that distribution(t, n) == p, for a single tailed distribution.
+function a(distribution, p, n) {
+    if (p === 1) {
+        return Number.NEGATIVE_INFINITY;
+    } else if (p === 0) {
+        return Number.POSITIVE_INFINITY;
+    }
+
+    var twoTailedDistribution;
+    if (distribution === normal) {
+        twoTailedDistribution = dNormal;
+    } else if (distribution === studentT) {
+        twoTailedDistribution = dStudentT;
+    } else {
+        twoTailedDistribution = function (a, b, c) { distribution(a, b, c) * 2; };
+    }
+
+    if (p === 0.5) {
+        return 0;
+    } else if (p > 0.5) {
+        return -dA(twoTailedDistribution, (1 - p) * 2, n)
+    } else {
+        return dA(twoTailedDistribution, p * 2, n)
+    }
+    
+}
+
+// Calculates t such that distribution(t, n) == p, for a two tailed distribution.
+function dA(distribution, p, n) {
+    var v = 0.5;
+    var dv = 0.5;
+    var t = 0;
+    while (dv > 1e-6) {
+        t = 1 / v - 1;
+        dv = dv / 2;
+        if (distribution(t, n) > p) {
+            v = v - dv;
+        } else {
+            v = v + dv;
+        }
+    }
+    return t;
+}
+
+function statCom(q, i, j, b) {
+    var zz = 1;
+    var z = zz;
+    var k = i;
+    while (k <= j) {
+        zz = zz * q * k / (k - b);
+        z = z + zz;
+        k = k + 2;
+    }
+    return z;
+}
+        </script>
+    </body>
+</html>
