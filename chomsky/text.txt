@@ -1,4 +1,4 @@
-<h1>[1:Chomsky]</h2>
+<h1>[1:Chomsky]</h1>
 
 <p>[aak:Chomsky é um mago.]</p>
 -----
