@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="jumbotron-narrow.css" rel="stylesheet">
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+function initialize() {
+    var mapCanvas = document.getElementById('map-canvas');
+    var mapOptions = {
+center: new google.maps.LatLng(-27.6032726, -48.5278513),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+    new google.maps.Marker({position: mapOptions.center, map: map});
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<title>Apartamento para alugar na Carvoeira</title>
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="#map-canvas">Endereço</a></li>
+                <li role="presentation"><a href="#fotos">Fotos</a></li>
+                <li role="presentation"><a href="#faq">Informações</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Aluga-se</h1>
+        <p class="lead">Apartamento de três quartos (1 suíte) mobiliado, a dois minutos da UFSC. Ao lado de mercados, padaria, restaurante, lanchonete e salão de beleza.</p>
+        <p><a class="btn btn-lg btn-info"
+            href="mailto:lucasboppre@gmail.com?subject=Apartamento" role="button">lucasboppre@gmail.com</a></p>
+        <p>ou</p>
+        <p><span class="btn btn-lg btn-info" >Tel/WhatsApp: (47) 9987-6842</span></p>
+    </div>
+
+    <div id="map-canvas" style="width: 100%; height: 400px;"></div>
+    <p><strong>Onde:</strong> Condomínio Encostas do Poente, Rua Romualdo de Barros, 861, apt 301, bloco A1, Carvoeira.</p>
+
+    <div id="fotos" class="row marketing">
+        <div class="col-lg-6">
+            <p><a href="images/image1.jpg">
+                <img src="images/image1.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+
+            <p><a href="images/image3.jpg">
+                <img src="images/image3.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+
+            <p><a href="images/image2.jpg">
+                <img src="images/image2.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+
+            <p><a href="images/image1.jpg">
+                <img src="images/image1.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+        </div>
+
+        <div class="col-lg-6">
+            <p><a href="images/image4.jpg">
+                <img src="images/image4.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+
+            <p><a href="images/image6.jpg">
+                <img src="images/image6.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+
+            <p><a href="images/image7.jpg">
+                <img src="images/image7.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+
+            <p><a href="images/image5.jpg">
+                <img src="images/image5.jpg" class="img-responsive" alt="Responsive image">
+            </a></p>
+        </div>
+    </div>
+
+    <div id="faq">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Quantos quartos?
+                </h4>
+            </div>
+            <div class="panel-body">
+                Três: dois quartos com banheiro social e um quarto com suíte. Tem
+                também sala, cozinha e lavanderia.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Qual o valor?
+                </h4>
+            </div>
+            <div class="panel-body">
+                <p>O aluguel é de R$ 1300,00. Com condomínio, água, luz e
+                internet (10 mb/s da NET) dá um total de ~R$2000 e uma média
+                de R$ 650 por morador.</p>
+
+                <p>Por exemplo, essas foram as nossas contas do mês de maio:
+                <a href="images/contas 03-2015.pdf">contas 03-2015.pdf</a></p>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    O apartamento está mobiliado?
+                </h4>
+            </div>
+            <div class="panel-body">
+                Sim. A sala tem televisão, sofás, mesa de jantar com cadeiras e mesa
+                de centro (como na foto, mas sem a bicicleta). A cozinha tem fogão
+                e geladeira. Não tem máquina de lavar, microondas nem
+                escrivaninhas. Todos os quartos tem armários embutidos. As camas
+                são nossas mas queremos vender e podemos parcelar.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Tem vaga de garagem? Portaria? Salão de festas?
+                </h4>
+            </div>
+            <div class="panel-body">
+                Sim, tem uma vaga de garagem, portaria 24h e salão de festas. Se
+                precisar de mais vagas é possível alugar de outros moradores por
+                preços bem baixos. O condomínio tem vagas para visitantes.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    É por imobiliária?
+                </h4>
+            </div>
+            <div class="panel-body">
+                Sim, mas só precisa fazer transferência, que é mais simples que um
+                contrato completo. É preciso um fiador. <a href="images/DOCUMENTAÇÃO E REQUISITOS NECESSÁRIOS P.docx">Este são os documentos necessários.</a>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Quando eu posso entrar?
+                </h4>
+            </div>
+            <div class="panel-body">
+                Hoje! Nós já liberamos o apartamento e por isso estamo com
+                pressa para alugar.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Quem é você?
+                </h4>
+            </div>
+            <div class="panel-body">
+                Eu sou o locatário atual e morei neste apartamento por cinco anos.
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Estou interessado(a) e/ou quero visitar e/ou tenho outras dúvidas.
+                </h4>
+            </div>
+            <div class="panel-body">
+                Você pode falar comigo pelo email <a href="mailto:lucasboppre@gmail.com">lucasboppre@gmail.com</a>
+                ou pelo telefone/WhatsApp (47) 9987-6842.
+            </div>
+        </div>
+    </div>
+
+    <a href="#">Voltar para o topo</a>
+</div>
+</body>
+</html>
