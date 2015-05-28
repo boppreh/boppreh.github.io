@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="jumbotron-narrow.css" rel="stylesheet">
 
+<link href="css/lightbox.css" rel="stylesheet" />
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
 function initialize() {
@@ -12,6 +16,7 @@ function initialize() {
     var mapOptions = {
 center: new google.maps.LatLng(-27.6032726, -48.5278513),
         zoom: 15,
+        scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(mapCanvas, mapOptions);
@@ -27,7 +32,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#map-canvas">Endereço</a></li>
+                <li role="presentation"><a href="#map-canvas">Endereço</a></li>
                 <li role="presentation"><a href="#fotos">Fotos</a></li>
                 <li role="presentation"><a href="#faq">Informações</a></li>
             </ul>
@@ -37,8 +42,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div class="jumbotron">
         <h1>Aluga-se</h1>
         <p class="lead">Apartamento de três quartos (1 suíte) mobiliado, a dois minutos da UFSC. Ao lado de mercados, padaria, restaurante, lanchonete e salão de beleza.</p>
-        <p><a class="btn btn-lg btn-info"
-            href="mailto:lucasboppre@gmail.com?subject=Apartamento" role="button">lucasboppre@gmail.com</a></p>
+        <p><a class="btn btn-lg btn-info" href="mailto:lucasboppre@gmail.com?subject=Apartamento" role="button">lucasboppre@gmail.com</a></p>
         <p>ou</p>
         <p><span class="btn btn-lg btn-info" >Tel/WhatsApp: (47) 9987-6842</span></p>
     </div>
@@ -48,38 +52,30 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
     <div id="fotos" class="row marketing">
         <div class="col-lg-6">
-            <p><a href="images/image1.jpg">
+            <p><a href="images/image1.jpg" data-lightbox="images">
                 <img src="images/image1.jpg" class="img-responsive" alt="Responsive image">
             </a></p>
 
-            <p><a href="images/image3.jpg">
+            <p><a href="images/image3.jpg" data-lightbox="images">
                 <img src="images/image3.jpg" class="img-responsive" alt="Responsive image">
             </a></p>
 
-            <p><a href="images/image2.jpg">
-                <img src="images/image2.jpg" class="img-responsive" alt="Responsive image">
+            <p><a href="images/image4.jpg" data-lightbox="images">
+                <img src="images/image4.jpg" class="img-responsive" alt="Responsive image">
             </a></p>
 
-            <p><a href="images/image1.jpg">
-                <img src="images/image1.jpg" class="img-responsive" alt="Responsive image">
+            <p><a href="images/image7.jpg" data-lightbox="images">
+                <img src="images/image7.jpg" class="img-responsive" alt="Responsive image">
             </a></p>
         </div>
 
         <div class="col-lg-6">
-            <p><a href="images/image4.jpg">
-                <img src="images/image4.jpg" class="img-responsive" alt="Responsive image">
+            <p><a href="images/image2.jpg" data-lightbox="images">
+                <img src="images/image2.jpg" class="img-responsive" alt="Responsive image">
             </a></p>
 
-            <p><a href="images/image6.jpg">
+            <p><a href="images/image6.jpg" data-lightbox="images">
                 <img src="images/image6.jpg" class="img-responsive" alt="Responsive image">
-            </a></p>
-
-            <p><a href="images/image7.jpg">
-                <img src="images/image7.jpg" class="img-responsive" alt="Responsive image">
-            </a></p>
-
-            <p><a href="images/image5.jpg">
-                <img src="images/image5.jpg" class="img-responsive" alt="Responsive image">
             </a></p>
         </div>
     </div>
@@ -104,9 +100,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 </h4>
             </div>
             <div class="panel-body">
-                <p>O aluguel é de R$ 1300,00. Com condomínio, água, luz e
-                internet (10 mb/s da NET) dá um total de ~R$2000 e uma média
-                de R$ 650 por morador.</p>
+                <p>O aluguel é de R$ 1300,00. Com condomínio, água, luz,
+                internet (10 mb/s da NET) telefone e TV a cabo dá um total de
+                ~R$ 2000 e uma média de R$ 650 por morador.</p>
 
                 <p>Por exemplo, essas foram as nossas contas do mês de maio:
                 <a href="images/contas 03-2015.pdf">contas 03-2015.pdf</a></p>
@@ -160,7 +156,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 </h4>
             </div>
             <div class="panel-body">
-                Hoje! Nós já liberamos o apartamento e por isso estamo com
+                Hoje! Nós já liberamos o apartamento e por isso estamos com
                 pressa para alugar.
             </div>
         </div>
@@ -183,8 +179,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 </h4>
             </div>
             <div class="panel-body">
-                Você pode falar comigo pelo email <a href="mailto:lucasboppre@gmail.com">lucasboppre@gmail.com</a>
-                ou pelo telefone/WhatsApp (47) 9987-6842.
+                <p>Me mande uma mensagem!</p>
+
+                <center>
+                    <p><a class="btn btn-lg btn-info" href="mailto:lucasboppre@gmail.com?subject=Apartamento" role="button">lucasboppre@gmail.com</a></p>
+                    <p><span class="btn btn-lg btn-info" >Tel/WhatsApp: (47) 9987-6842</span></p>
+                </center>
             </div>
         </div>
     </div>
