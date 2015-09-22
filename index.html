@@ -39,6 +39,8 @@ function Cell(active, primarySelection, secondarySelection, secondaryActive) {
 var m, a, m2;
 var board;
 function buildBoard() {
+    m = Math.max(2, Math.min(100, m));
+    a = Math.max(1, Math.min(m-1, a));
     m2 = 2 * m - 2;
     board = [];
     for (var i = 0; i <= m2; i++) {
@@ -129,8 +131,14 @@ function render() {
     context.restore();
 }
 
-m = 2;
-a = 1;
+var urlParam = window.location.hash.slice(1);
+if (urlParam) {
+    m = urlParam.split(',')[0];
+    a = urlParam.split(',')[1];
+} else {
+    m = 2;
+    a = 1;
+}
 buildBoard();
 
 var selecting = false;
