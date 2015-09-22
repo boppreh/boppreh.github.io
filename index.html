@@ -1,164 +1,249 @@
-﻿<!DOCTYPE html>
-<!--Hello! Thank you for your interest in this page. If you have any
-suggestions feel free to send a pull request or open an issue at
-https://github.com/boppreh/boppreh.github.io-->
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>boppreh.com</title>
-		<link rel="stylesheet" href="style.css">
-	</head>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width" />
+        <title>Binary Polynomial Reduction - A Game for One</title>
+        <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            background-color: #456990;
+        }
+        </style>
+    </head>
+    <body>
+        <canvas></canvas>
+        <script>
+"use strict";
 
-	<body>
-		<header>My Projects</header>
+var canvas = document.getElementsByTagName('canvas')[0]
+var context = canvas.getContext('2d');
 
-		<article>
-			<section>
-				<h1>Libraries</h1>
+function Cell(active, primarySelection, secondarySelection, secondaryActive) {
+    return {
+        active: active,
+        primarySelection: primarySelection,
+        secondarySelection: secondarySelection,
+        secondaryActive: secondaryActive,
+    }
+}
 
-				<p>Some were made just for fun in a couple of hours, others have been been in use for years. Written in Python unless noted otherwise, and mostly for Py3.3.</p>
+var m, a, m2;
+var board;
+function buildBoard() {
+    m2 = 2 * m - 2;
+    board = [];
+    for (var i = 0; i <= m2; i++) {
+        var line = [];
+        board.push(line);
+        for (var j = 0; j <= m2; j++) {
+            line.push(Cell(i == j, false, false, false, false));
+        }
+    }
 
-				<dl>
-				<dt><a href="https://github.com/boppreh/console">console</a></dt>
-				<dd>Cross platform library for simple command line applications</dd>
+    updateDimensions();
+}
 
-				<dt><a href="https://github.com/boppreh/inflist">inflist</a></dt>
-				<dd>Infinite lists in Python using lazy evaluation</dd>
+var cellSpace, cellPadding, cellBorder, cellSize, canvasPadding;
+function updateDimensions() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-				<dt><a href="https://github.com/boppreh/quine">quine</a></dt>
-				<dd>Transforms any Python program into a quine</dd>
+    canvasPadding = canvas.height / 20;
+    cellSpace = ((Math.min(canvas.width, canvas.height) - 2 * canvasPadding) / (m2+1))|0;
+    cellPadding = Math.max(1, (cellSpace / 20)|0);
+    cellBorder = (cellSpace / 5)|0;
+    cellSize = cellSpace - cellPadding * 2;
 
-				<dt><a href="https://github.com/boppreh/markov">markov</a></dt>
-				<dd>Markov chain library to create new data from examples</dd>
+    render();
+}
 
-				<dt><a href="https://github.com/boppreh/background">background</a></dt>
-				<dd>Library for Python applications that run in the background</dd>
+window.onresize = updateDimensions;
+function cellY(row) { return canvasPadding + row * cellSpace; }
+function cellX(col) { return (canvas.width/2 + (col-(m2+1)/2)*cellSpace)|0; }
+function rowY(y) { return Math.round((y - canvasPadding) / cellSpace - 0.5); }
+function colX(x) { return Math.round((x - canvas.width/2) / cellSpace + (m2+1)/2 - 0.5); }
+function isCorrect(row, col) {
+    var xored0 = row - m >= col && (row - col - m) % (m - a) == 0;
+    var xoredA = col >= a && (a + row - col - m) % (m - a) == 0;
+    return row >= col && (row == col || (row >= m && xoredA ^ xored0));
+}
 
-				<dt><a href="https://github.com/boppreh/simpleserver">simpleserver</a></dt>
-				<dd>Simple HTTP server backed by nothing more than a couple of dictionaries</dd>
+function render() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
-				<dt><a href="https://github.com/boppreh/keyboard">keyboard</a></dt>
-				<dd>Utility for handling global keyboard events in Windows</dd>
+    context.save();
+    context.fillStyle = '#CCC';
+    context.font = '16px Verdana';
+    context.textAlign = 'right';
+    context.fillText("m="+m, canvas.width - 10, canvas.height - 30);
+    context.fillText("a="+a, canvas.width - 10, canvas.height - 10);
+    context.restore();
 
-				<dt><a href="https://github.com/boppreh/derivative">derivative</a></dt>
-				<dd>Library for calculating derivatives using dual numbers</dd>
+    context.save();
+    for (var i = 0; i <= m2; i++) {
+        for (var j = 0; j <= m2; j++) {
+            context.globalAlpha = 1;
 
-				<dt><a href="https://github.com/boppreh/bayesian">bayesian</a></dt>
-				<dd>Utility for Bayesian reasoning</dd>
+            context.fillStyle = '#CCC';
+            context.fillRect(cellX(j), cellY(i) - cellPadding,
+                             cellSpace, cellSpace+1);
+            var cell = board[i][j];
+            if (isCorrect(i, j)) {
+                context.fillStyle = cell.active ? '#33DD33' : '#459990';
+            } else {
+                context.fillStyle = cell.active ? '#CC3333' : '#456990';
+            }
+            context.fillRect(cellX(j) + cellPadding, cellY(i),
+                             cellSize, cellSize);
 
-				<dt><a href="https://github.com/boppreh/easier-as3">easier-as3</a></dt>
-				<dd>Tiny functions for common tasks</dd>
+            if (cell.primarySelection) {
+                context.fillStyle = '#EEE';
+                context.globalAlpha = cell.active ? 1 : 0.2;
+                context.beginPath();
+                context.moveTo(cellX(j)+cellBorder, cellY(i)+cellBorder);
+                context.lineTo(cellX(j)+cellSize-cellBorder, cellY(i)+cellBorder);
+                context.lineTo(cellX(j)+cellBorder, cellY(i)+cellSize-cellBorder);
+                context.fill();
+            }
 
-				<dt><a href="https://github.com/boppreh/fsm">fsm</a></dt>
-				<dd>Fast and simple Finite State Machine library</dd>
+            if (cell.secondarySelection) {
+                context.fillStyle = '#EEE';
+                context.globalAlpha = cell.secondaryActive ? 0.9 : 0.1;
+                context.beginPath();
+                context.moveTo(cellX(j)+cellSize-cellBorder, cellY(i)+cellSize-cellBorder);
+                context.lineTo(cellX(j)+cellSize-cellBorder, cellY(i)+cellBorder);
+                context.lineTo(cellX(j)+cellBorder, cellY(i)+cellSize-cellBorder);
+                context.fill();
+            }
+        }
+    }
+    context.restore();
+}
 
-				<dt><a href="https://github.com/boppreh/libeditor">libeditor</a></dt>
-				<dd>Library for creating a multi-document editor with a desktop GUI</dd>
+m = 2;
+a = 1;
+buildBoard();
 
-				<dt><a href="https://github.com/boppreh/gifencoder">gifencoder</a></dt>
-				<dd>The missing method gif.Encode in Go's library</dd>
+var selecting = false;
+var selectionStart = -1;
+var selectionEnd = -1;
+var secondarySelectionStart = -1;
 
-				<dt><a href="https://github.com/boppreh/kahn">kahn</a></dt>
-				<dd>Simple and flexible pipeline system for Python</dd>
+function testVictory() {
+    for (var row = 0; row <= m2; row++) {
+        for (var col = 0; col <= m2; col++) {
+            var cell = board[row][col];
+            if (cell.active != isCorrect(row, col)) {
+                return;
+            }
+        }
+    }
+    m += 1;
+    a = (Math.random()*(m-1) + 1)|0;
+    buildBoard();
+}
 
-				<dt><a href="https://github.com/boppreh/simplecrypto">simplecrypto</a></dt>
-				<dd>Cryptographic library with really simple API</dd>
+function updateSelectionStatus() {
+    var selectionType;
 
-				<dt><a href="https://github.com/boppreh/fuzzy">fuzzy</a></dt>
-				<dd>Library for decision making based on fuzzy rules</dd>
-				</dl>
-			</section>
-			<section>
-				<h1>Background Applications</h1>
+    var start, end;
+    if (selecting) {
+        selectionType = 'primary';
+        start = Math.min(selectionStart, selectionEnd);
+        end = Math.max(selectionStart, selectionEnd);
+    } else if (selectionStart !== -1) {
+        selectionType = 'secondary';
+        start = secondarySelectionStart;
+        end = start + Math.abs(selectionStart - selectionEnd);
+    } else {
+        selectionType = 'none';
+    }
 
-				<p>I love the idea of small programs with little to no interface doing work in the background, and this is my collection of them. These applications live in the tray bar, interfacing with the user through notifications or web services. They are very small, from a few dozen lines to no more than a couple hundred.</p>
+    for (var row = 0; row <= m2; row++) {
+        for (var col = 0; col <= m2; col++) {
+            var inRange = col >= start && col <= end;
+            if (selectionType == 'primary') {
+                board[row][col].primarySelection = inRange;
+            } else if (selectionType == 'secondary') {
+                board[row][col].secondarySelection = inRange;
+                var distance = col - start;
+                var src = Math.min(selectionStart, selectionEnd) + distance;
+                board[row][col].secondaryActive = (src >= 0 && src <= m2) && board[row][src].active;
+            } else {
+                board[row][col].primarySelection = false;
+                board[row][col].secondarySelection = false;
+            }
+        }
+    }
+}
+canvas.onmousedown = function(e) {
+    var col = colX(e.clientX);
+    if (selectionStart === -1) {
+        selecting = true;
+        selectionStart = col;
+        selectionEnd = col;
+    } else if (selectionStart != col && selectionEnd != col) {
+        updateSelectionStatus();
+        for (var i = 0; i <= Math.abs(selectionEnd - selectionStart); i++) {
+            var col = secondarySelectionStart + i;
+            if (col < 0 || col > m2) {
+                continue;
+            }
+            for (var row = 0; row <= m2; row++) {
+                board[row][col].active ^= board[row][col].secondaryActive;
+            }
+        }
+        selecting = false;
+        if (!e.shiftKey) {
+            selectionStart = -1;
+            selectionEnd = -1;
+        }
+    }
+    updateSelectionStatus();
+    setTimeout(testVictory, 1000)
+}
+canvas.onmouseup = function(e) {
+    if (selecting) {
+        selecting = false;
+        selectionEnd = colX(e.clientX);
+        secondarySelectionStart = colX(e.clientX);
+        updateSelectionStatus();
+    }
+}
+canvas.onmousemove = function(e) {
+    if (selecting) {
+        selectionEnd = colX(e.clientX);
+        updateSelectionStatus();
+    } else if (selectionStart !== -1) {
+        secondarySelectionStart = colX(e.clientX);
+        updateSelectionStatus();
+    }
+}
+canvas.onwheel = function(e) {
+    if (e.shiftKey) {
+        m = Math.max(2, Math.min(100, m + (e.deltaY < 0 ? 1 : -1)));
+        a = Math.max(1, Math.min(m - 1, a));
+        buildBoard();
+        updateDimensions();
+    } else {
+        a = Math.max(1, Math.min(m - 1, a + (e.deltaY < 0 ? 1 : -1)));
+        updateDimensions();
+    }
+    render();
+}
+//setInterval(function() { a = (a + 1) % m; buildAnswer(); render(); }, 1000);
 
-				<p>All of them require and make use of the <a href="https://github.com/boppreh/background">background</a> and <a href="https://github.com/boppreh/simpleserver">simpleserver</a> libraries, and are written for Python 3.3. May contain hardcoded paths because they are too small to have proper configurations.</p>
-
-				<dl>
-				<dt><a href="https://github.com/boppreh/typist">typist</a></dt>
-				<dd>Records typing statistics <em>WARNING: records all keypresses in plaintext, potentially exposing passwords and private information. Use with caution.</em></dd>
-				
-				<dt><a href="https://github.com/boppreh/scheduler">scheduler</a></dt>
-				<dd>Schedule manager, notifying of events and allocating time for tasks</dd>
-				
-				<dt><a href="https://github.com/boppreh/pycalc">pycalc</a></dt>
-				<dd>Calculator server with measure unit and Python support <em>WARNING: runs user supplied code. Check your firewall before starting.</em></dd>
-				
-				<dt><a href="https://github.com/boppreh/switch">switch</a></dt>
-				<dd>Server responsible for starting and stopping the other applications</dd>
-				
-				<dt><a href="https://github.com/boppreh/netstat">netstat</a></dt>
-				<dd>Detects changes in network connection quality and notifies the user</dd>
-				
-				<dt><a href="https://github.com/boppreh/gitstatus">websentinel</a></dt>
-				<dd>Background app for tracking status of local Git repositories</dd>
-				
-				<dt><a href="https://github.com/boppreh/doorman">doorman</a></dt>
-				<dd>Notifies when computers enter and exit the wireless network</dd>
-
-				<dt><a href="https://github.com/boppreh/dashboard">dashboard</a></dt>
-				<dd>Shows current status of background applications</dd>
-
-				<dt><a href="https://github.com/boppreh/j">j</a></dt>
-				<dd>Extensible global hotkeys for common tasks</dd>
-
-				<dt><a href="https://github.com/boppreh/activity">activity</a></dt>
-				<dd>Watches, stores and reports user activity on the computer</dd>
-				</dl>
-			</section>
-			<section>
-				<h1>CLI Applications</h1>
-
-				<p>Simple but useful applications that run in a command prompt.</p>
-
-				<dl>
-				<dt><a href="https://github.com/boppreh/autokeyboard">autokeyboard</a></dt>
-				<dd>Automate everything keyboard</dd>
-
-				<dt><a href="https://github.com/boppreh/kindle-collections">kindle-collections</a></dt>
-				<dd>Automatically generates collections from your directory structure</dd>
-
-				<dt><a href="https://github.com/boppreh/websentinel">websentinel</a></dt>
-				<dd>Watches webpages for changes and keyword occurencess</dd>
-				
-				<dt><a href="https://github.com/boppreh/py2cli">py2cli</a></dt>
-				<dd>Python module for transforming regular scripts into CLI applications</dd>
-				
-				<dt><a href="https://github.com/boppreh/gallery">gallery</a></dt>
-				<dd>Extracts images from websites and displays in a gallery</dd>
-
-				<dt><a href="https://github.com/boppreh/filereplace">filereplace</a></dt>
-				<dd>Utility to easily replace patterns in files</dd>
-				
-				<dt><a href="https://github.com/boppreh/packager">packager</a></dt>
-				<dd>Python script for converting existing projects into PyPi packages</dd>
-				
-				<dt><a href="https://github.com/boppreh/anakata">anakata</a></dt>
-				<dd>A 4D, tiled, command line puzzle game in Python</dd>
-				</dl>
-			</section>
-			<section>
-				<h1>Experiments</h1>
-
-				<p>One-off programs created to test a concept or as an exercise.</p>
-
-				<dl>
-				<dt><a href="https://github.com/boppreh/gomeet">gomeet</a></dt>
-				<dd>Go server to punch NAT holes</dd>
-				
-				<dt><a href="https://github.com/boppreh/gowiki">gowiki</a></dt>
-				<dd>Very simple wiki server in Go</dd>
-				
-				<dt><a href="https://github.com/boppreh/attachment">attachment</a></dt>
-				<dd>Downloads email attachments you receive and emails attachments you upload</dd>
-				
-				<dt><a href="https://github.com/boppreh/miller-rabin">miller-rabin</a></dt>
-				<dd>Simple implementation of the Miller-Rabin primality test in Go and Python</dd>
-				</dl>
-			</section>
-		</article>
-
-		<footer><a href="mailto:contact@boppreh.com">contact@boppreh.com</a></footer>
-	</body>
+function update() { render(); window.requestAnimationFrame(update); }
+update();
+        </script>
+    </body>
 </html>
