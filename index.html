@@ -194,6 +194,10 @@ function updateSelectionStatus() {
     }
 }
 canvas.onmousedown = function(e) {
+    if (e.which === 3) {
+        return;
+    }
+     
     var col = colX(e.clientX);
     if (selectionStart === -1) {
         selecting = true;
@@ -218,7 +222,7 @@ canvas.onmousedown = function(e) {
     }
     updateSelectionStatus();
     setTimeout(testVictory, 1000)
-}
+};
 canvas.onmouseup = function(e) {
     if (selecting) {
         selecting = false;
@@ -226,7 +230,7 @@ canvas.onmouseup = function(e) {
         secondarySelectionStart = colX(e.clientX);
         updateSelectionStatus();
     }
-}
+};
 canvas.onmousemove = function(e) {
     if (selecting) {
         selectionEnd = colX(e.clientX);
@@ -235,7 +239,7 @@ canvas.onmousemove = function(e) {
         secondarySelectionStart = colX(e.clientX);
         updateSelectionStatus();
     }
-}
+};
 canvas.onwheel = function(e) {
     if (e.shiftKey) {
         m = Math.max(2, Math.min(100, m + (e.deltaY < 0 ? 1 : -1)));
@@ -246,8 +250,15 @@ canvas.onwheel = function(e) {
         a = Math.max(1, Math.min(m - 1, a + (e.deltaY < 0 ? 1 : -1)));
         updateDimensions();
     }
-    render();
-}
+    return false;
+};
+canvas.oncontextmenu = function(e) {
+    selecting = false;
+    selectionStart = -1;
+    selectionEnd = -1;
+    updateSelectionStatus();
+    return false;
+};
 //setInterval(function() { a = (a + 1) % m; buildAnswer(); render(); }, 1000);
 
 function update() { render(); window.requestAnimationFrame(update); }
